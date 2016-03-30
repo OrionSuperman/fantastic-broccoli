@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app='poll_app'>
+<head>
+	<title>users</title>
+	<script src="./bower_components/angular/angular.js"></script>
+	<script src="./bower_components/angular-route/angular-route.js"></script>
+	<script src="./app/partialRoutes.js"></script>
+	<script src="./app/factories/user.js"></script>
+	<script src="./app/factories/poll.js"></script>
+	<script src="./app/factories/current_user.js"></script>
+	<script src="./app/controllers/users.js"></script>
+	<script src="./app/controllers/polls.js"></script>
+	<script type="text/javascript">console.log("Loading done!")</script>
+</head>
+
+<body>
+{{current_user}}
+<div ng-view=""></div>
+
+
+</body>
+</html>
