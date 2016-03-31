@@ -1,38 +1,36 @@
-console.log('polls.js');
+console.log('games.js');
 
-poll_app.controller('PollController', function($scope, $location, $window, PollFactory, UserFactory, CurrentFactory){
+game_app.controller('GameController', function($scope, $location, $window, GameFactory, UserFactory, CurrentFactory){
 	$scope.current_user = CurrentFactory.getCurrentUser();
 
-	var setPolls = function(){
-		PollFactory.index(function(data){
-			$scope.polls = data['data'];
-			$scope.current_user = CurrentFactory.getCurrentUser();
+	// var setPolls = function(){
+	// 	PollFactory.index(function(data){
+	// 		$scope.polls = data['data'];
+	// 		$scope.current_user = CurrentFactory.getCurrentUser();
+	// 	})
+	// }
+
+	$scope.newGame = function(){
+		
+		GameFactory.create($scope.current_user, function(data){
+			
+			$window.location.href = '#/game/' + data.data._id;
+			$scope.game = data.data;
+
 		})
 	}
 
-	$scope.addPoll = function(){
-		console.log($scope.new_poll.answers);
-		$scope.new_poll._user = $scope.current_user._id;
-		PollFactory.create($scope.new_poll, function(data){
-			setPolls();
-			$window.location.href = '#/dashboard';
+	// $scope.deletePoll = function(id){
 
-		})
-	}
+	// 	PollFactory.delete(id, function(data){
+	// 		setPolls();
+	// 	})
+	// }
 
-	$scope.deletePoll = function(id){
-
-		PollFactory.delete(id, function(data){
-			setPolls();
-		})
-	}
-
-	$scope.vote = function(poll, answer){
-		var info = {poll: poll, answer: answer}
-		PollFactory.update(info, function(data){
-			PollFactory.show(function(data){
-				$scope.poll = data['data'];
-			})
+	$scope.chooseOption = function(answer){
+		var info = {user: $scope.current_user, answer: answer}
+		GameFactory.update(info, function(data){
+			$window.location.href = '#/user/' + current_user._id;
 		})
 	}
 
@@ -43,11 +41,7 @@ poll_app.controller('PollController', function($scope, $location, $window, PollF
 	}
 
 	var path = $location.path();
-	if(path.substring(0,6) == '/poll/'){
-		PollFactory.show(function(data){
-			$scope.poll = data['data'];
-		})
-	} else {
-		setPolls();
-	}
+	if(path.substring(0,6) == '/game/'){
+		$scope.game._id = path.substring(7,path.length);
+	} 
 })

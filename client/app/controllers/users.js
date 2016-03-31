@@ -5,9 +5,9 @@ poll_app.controller('UserController', function($scope, $location, UserFactory, C
 	$scope.addUser = function(){
 		UserFactory.create($scope.new_user, function(data){
 			
+			$location.path('/user/'+ data.data._id);
 			CurrentFactory.setCurrentUser(data['data']);
 			$scope.current_user = CurrentFactory.getCurrentUser();
-			$location.path('/dashboard');
 		});
 	}
 })

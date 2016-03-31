@@ -8,9 +8,9 @@ module.exports = function(app){
 
 	});
 
-	// app.get('/users', function(req, res){
-	// 	users.index(req, res);
-	// });
+	app.get('/user/:id', function(req, res){
+		users.show(req, res);
+	});
 
 	app.post('/users', function(req, res){
 		users.create(req, res);
@@ -20,9 +20,9 @@ module.exports = function(app){
 	// 	users.update(req, res);
 	// })
 
-	app.get('/game/:id', function(req, res){
-		games.show(req, res);
-	})
+	// app.get('/game/:id', function(req, res){
+	// 	games.show(req, res);
+	// })
 
 	// app.get('/games', function(req, res){
 	// 	games.index(req, res);

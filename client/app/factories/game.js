@@ -1,19 +1,19 @@
-console.log('poll.js');
+console.log('game.js');
 
-poll_app.factory('PollFactory', function($http, $location){
+game_app.factory('GameFactory', function($http, $location){
 	var factory = {};
-	var polls = [];
+	var game = [];
 
-	factory.index = function(callback) {
-		$http.get('/polls')
-		.then(function(output){
-			polls = output;
-			callback(polls);
-		})
-	}
+	// factory.index = function(callback) {
+	// 	$http.get('/polls')
+	// 	.then(function(output){
+	// 		polls = output;
+	// 		callback(polls);
+	// 	})
+	// }
 
 	factory.create = function(info, callback){
-		$http.post('/polls', info)
+		$http.post('/games', info)
 		.then(function(output){
 			callback(output);
 		})

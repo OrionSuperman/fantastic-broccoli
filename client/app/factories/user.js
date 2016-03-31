@@ -10,5 +10,12 @@ poll_app.factory('UserFactory', function($http, $location){
 		})
 	}
 
+	factory.show = function(callback){
+		$http.get('/user/:id')
+		.then(function(output){
+			callback(output);
+		})
+	}
+
 	return factory;
 })
