@@ -1,0 +1,45 @@
+<div ng-controller='GameController'>
+	<h1>The Game</h1>
+	<h3>How to play</h3>
+	<ul>
+		<li>You will be assigned to either selecting a row or column, and your opponent the opposite.</li>
+		<li>Row earns the points on the left, column points on the right.</li>
+		<li>Your opponent will also make a choice and the intersection of choices determines what points will be assigned.</li>
+	</ul>
+	<table>
+		<tr ng-if="current_user._id == game.user1._id">
+			<td ng-if="current_user._id == game.userA._id"></td>
+			<td></td>
+			<td><button ng-click="chooseOption(0)">Choose Col 1</button></td>
+			<td><button ng-click="chooseOption(1)">Choose Col 2</button></td>
+			<td><button ng-click="chooseOption(2)">Choose Col 3</button></td>
+		</tr>
+		<tr>
+			<th></th>
+			<th>Column 1</th>
+			<th>Column 2</th>
+			<th>Column 3</th>
+		</tr>
+		<tr>
+			<td ng-if="current_user._id == game.userA._id"><button ng-click="chooseOption(0)">Choose Row 1</button></td>
+			<th>Row 1</th>
+			<td>30 / -30</td>
+			<td>-10 / 10</td>
+			<td>10 / -10</td>
+		</tr>
+		<tr>
+			<td ng-if="current_user._id == game.userA._id"><button ng-click="chooseOption(1)">Choose Row 1</button></td>
+			<th>Row 2</th>
+			<td>-10 / 10</td>
+			<td>20 / -20</td>
+			<td>-20 / 20</td>
+		</tr>
+		<tr>
+			<td ng-if="current_user._id == game.userA._id"><button ng-click="chooseOption(2)">Choose Row 1</button></td>
+			<th>Row 3</th>
+			<td>10 / -10</td>
+			<td>-20 / 20</td>
+			<td>30 / -30</td>
+		</tr>
+	</table>
+</div>
