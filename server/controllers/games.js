@@ -7,10 +7,12 @@ var User = mongoose.model('User', []);
 var table = [[30, -10, 10],
 			 [-10, 20, -20],
 			 [10, -20, 30]
-			]
+			];
+
+var gameQueue = [];
 
 module.exports = (function(){
-	// return {
+	return {
 	// 	index: function(req, res){
 	// 		Game.find({})
 	// 		.populate('_user')
@@ -22,32 +24,46 @@ module.exports = (function(){
 	// 			}
 	// 		})
 	// 	},
-		// show: function(req, res){
-		// 	Game.findOne({_id: req.params.id}, function(err, results){
-		// 		if(err){
-		// 			console.log(err);
-		// 		} else {
-		// 			console.log(results);
-		// 			res.json(results);
-		// 		}
-		// 	})
-		// },
+		show: function(req, res){
+			Game.findOne({_id: req.params.id}, function(err, results){
+				if(err){
+					console.log(err);
+				} else {
+					// console.log(results);
+					res.json(results);
+				}
+			})
+		},
 		create: function(req, res){
 			Game.findOne({}, {}, { sort: { 'created_at' : -1} }, function(err, last_game){
-				if(!last_game.userA){
-					last_game.userA._user = req.body.user._id;
-					res.json(last_game);
-				} else {
-					var game = new Game();
-					game.user1._user = req.body._id;
-					game.save(function(err){
+				// console.log(last_game);
+				if(!last_game){
+					var newgame = new Game();
+					newgame.user1._user = req.body._id;
+					newgame.save(function(err){
 						if(err){
 							console.log(err);
 						} else {
 							res.json(game);
 						}
 					});
+				} else {
+					if(!last_game.userA){
+						last_game.userA._user = req.body.user._id;
+						res.json(last_game);
+					} else {
+						var game = new Game();
+						game.user1._user = req.body._id;
+						game.save(function(err){
+							if(err){
+								console.log(err);
+							} else {
+								res.json(game);
+							}
+						});
+					}
 				}
+				
 			});
 		},
 		// delete: function(req, res){
@@ -62,6 +78,7 @@ module.exports = (function(){
 		// 	})
 		// },
 		update: function(req, res){
+			console.log(req.body);
 			Game.findOne({_id: req.body.game._id}, function(err, results){
 				if(err){
 					console.log(err);

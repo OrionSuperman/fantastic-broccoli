@@ -1,6 +1,8 @@
-<div ng-controller='PollController'>
+<div ng-controller='GameController'>
 	<h1>Hello {{current_user.name}}</h1>
 	<h3>You have {{current_user.score}} score</h3>
+
+	{{current_user}}
 
 	<button ng-click="newGame()">Play Again!</button>
 </div>

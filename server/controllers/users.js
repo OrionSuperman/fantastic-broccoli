@@ -6,7 +6,8 @@ var User = mongoose.model('User', []);
 module.exports = (function(){
 	return {
 		show: function(req, res){
-			User.findOne({_id, req.params.id}, function(err, results){
+			console.log(req);
+			User.findOne({_id, req}, function(err, results){
 				if(err){
 					console.log(err);
 				} else {
@@ -14,7 +15,6 @@ module.exports = (function(){
 				}
 			})
 		},
-	
 		create: function(req, res){
 			var user = new User(req.body);
 			user.save(function(err){

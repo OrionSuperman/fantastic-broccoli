@@ -13,6 +13,8 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 	$scope.newGame = function(){
 		
 		GameFactory.create($scope.current_user, function(data){
+
+			console.log(data.data);
 			
 			$window.location.href = '#/game/' + data.data._id;
 			$scope.game = data.data;
@@ -28,7 +30,7 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 	// }
 
 	$scope.chooseOption = function(answer){
-		var info = {user: $scope.current_user, answer: answer}
+		var info = {user: $scope.current_user, answer: answer, game: $scope.game}
 		GameFactory.update(info, function(data){
 			$window.location.href = '#/user/' + current_user._id;
 		})
@@ -42,6 +44,9 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 
 	var path = $location.path();
 	if(path.substring(0,6) == '/game/'){
-		$scope.game._id = path.substring(7,path.length);
+		// $scope.game._id = path.substring(7,path.length);
+		GameFactory.show(function(data){
+			$scope.game = data.data;
+		})
 	} 
 })

@@ -20,9 +20,9 @@ module.exports = function(app){
 	// 	users.update(req, res);
 	// })
 
-	// app.get('/game/:id', function(req, res){
-	// 	games.show(req, res);
-	// })
+	app.get('/game/:id', function(req, res){
+		games.show(req, res);
+	})
 
 	// app.get('/games', function(req, res){
 	// 	games.index(req, res);

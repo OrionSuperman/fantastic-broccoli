@@ -21,7 +21,7 @@ game_app.factory('GameFactory', function($http, $location){
 
 	factory.update = function(info, callback){
 		console.log(info);
-		$http.put('/polls', info)
+		$http.put('/games', info)
 		.then(function(output){
 			callback(output);
 		})
@@ -30,7 +30,7 @@ game_app.factory('GameFactory', function($http, $location){
 	factory.delete = function(info, callback){
 		console.log("THIS IS THE ID");
 		console.log(info);
-		$http.post('/polls/delete', info)
+		$http.post('/game/delete', info)
 		.then(function(output){
 			callback(output);
 		})
