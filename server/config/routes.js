@@ -1,7 +1,7 @@
 console.log('routes.js');
 
 var users = require('./../controllers/users.js');
-var polls = require('./../controllers/polls.js');
+var games = require('./../controllers/games.js');
 
 module.exports = function(app){
 	app.get('/', function(req, res){
@@ -20,25 +20,25 @@ module.exports = function(app){
 	// 	users.update(req, res);
 	// })
 
-	app.get('/poll/:id', function(req, res){
-		polls.show(req, res);
+	app.get('/game/:id', function(req, res){
+		games.show(req, res);
 	})
 
-	app.get('/polls', function(req, res){
-		polls.index(req, res);
+	// app.get('/games', function(req, res){
+	// 	games.index(req, res);
+	// })
+
+	app.post('/games', function(req, res){
+		games.create(req, res);
 	})
 
-	app.post('/polls', function(req, res){
-		polls.create(req, res);
+	app.put('/games', function(req, res){
+		games.update(req, res);
 	})
 
-	app.put('/polls', function(req, res){
-		polls.update(req, res);
-	})
-
-	app.post('/polls/delete', function(req, res){
-		console.log("ROUTES DELETE");
-		console.log(req.body);
-		polls.delete(req, res);
-	})
+	// app.post('/games/delete', function(req, res){
+	// 	console.log("ROUTES DELETE");
+	// 	console.log(req.body);
+	// 	games.delete(req, res);
+	// })
 };
