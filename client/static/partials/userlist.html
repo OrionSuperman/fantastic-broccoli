@@ -1,0 +1,12 @@
+<div class='container' ng-init="index()" ng-app='sortApp' ng-controller="UserController">
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>User</th>
+			<th>Score</th>
+		</tr>
+		<tr ng-repeat="user in users | orderBy:'-score'">
+			<td>{{user.name}}</td>
+			<td>{{user.score}}</td>
+		</tr>
+	</table>
+</div>

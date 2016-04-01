@@ -4,9 +4,10 @@ var mongoose = require('mongoose');
 var Game = mongoose.model('Game', []);
 var User = mongoose.model('User', []);
 
-var table = [[30, -10, 10],
-			 [-10, 20, -20],
-			 [10, -20, 30]
+var table = [[],
+			 [0, 30, -10, 10],
+			 [0, -10, 20, -20],
+			 [0, -10, 20, -30]
 			];
 
 var gameQueue = [];

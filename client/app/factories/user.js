@@ -3,6 +3,13 @@ console.log('user.js');
 game_app.factory('UserFactory', function($http, $location){
 	var factory = {};
 
+	factory.index = function(callback){
+		$http.get('/users')
+		.then(function(output){
+			callback(output);
+		})
+	}
+
 	factory.create = function(info, callback){
 		$http.post('/users', info)
 		.then(function(output){

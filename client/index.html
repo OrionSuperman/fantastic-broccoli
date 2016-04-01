@@ -2,7 +2,7 @@
 <html ng-app='game_app'>
 <head>
 	<title>users</title>
-	<script src="./bower_components/angular/angular.js"></script>
+   	<script src="./bower_components/angular/angular.js"></script>
 	<script src="./bower_components/angular-route/angular-route.js"></script>
 	<script src="./app/partialRoutes.js"></script>
 	<script src="./app/factories/user.js"></script>
@@ -11,10 +11,33 @@
 	<script src="./app/controllers/users.js"></script>
 	<script src="./app/controllers/games.js"></script>
 	<script type="text/javascript">console.log("Index.html Loading done!")</script>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <style>
+    	body {
+    		padding: 30px;
+    	}
+    	.red {
+    		
+    		color: blue;
+    	}
+    	.green {
+    		
+    		color: green;
+    	}
+    </style>
 </head>
 
 <body>
-
+	<h1>Zero Sum Game</h1>
+	<h3>How to play</h3>
+	<ul>
+		<li>You will be assigned to either selecting a row or column, and your opponent the opposite.</li>
+		<li>Row earns the points on the left, column points on the right.</li>
+		<li>Your opponent will also make a choice and the intersection of choices determines what points will be assigned.</li>
+	</ul>
+	<a href='#/userlist'>User Rankings</a>
 <div ng-view=""></div>
 
 

@@ -10,4 +10,11 @@ game_app.controller('UserController', function($scope, $location, UserFactory, C
 			$scope.current_user = CurrentFactory.getCurrentUser();
 		});
 	}
+
+	$scope.index = function(){
+
+		UserFactory.index(function(data){
+			$scope.users = data.data;
+		})
+	}
 })

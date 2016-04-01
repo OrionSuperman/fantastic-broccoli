@@ -16,6 +16,9 @@ game_app.config(function($routeProvider){
 	.when('/user/:id', {
 		templateUrl: '/static/partials/user.html'
 	})
+	.when('/userlist', {
+		templateUrl: '/static/partials/userlist.html'
+	})
 	.otherwise({
 		redirectTo: '/'
 	});

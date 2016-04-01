@@ -24,9 +24,9 @@ module.exports = function(app){
 		games.show(req, res);
 	})
 
-	// app.get('/games', function(req, res){
-	// 	games.index(req, res);
-	// })
+	app.get('/users', function(req, res){
+		users.index(req, res);
+	})
 
 	app.post('/games', function(req, res){
 		games.create(req, res);

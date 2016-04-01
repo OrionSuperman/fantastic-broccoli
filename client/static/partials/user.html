@@ -1,4 +1,5 @@
-<div ng-controller='GameController'>
+<div class='container' ng-controller='GameController'>
+	<a ng-if="current_user" ng-click='logout()' href='#'>Logout</a>
 	<h1>Welcome to {{user.name}}'s page!</h1>
 
 	<h3>They currently have {{user.score}} points!</h3>
