@@ -10,9 +10,11 @@ game_app.factory('UserFactory', function($http, $location){
 		})
 	}
 
-	factory.show = function(callback){
-		$http.get('/user/:id')
+	factory.show = function(path, callback){
+		console.log("User Show fact");
+		$http.get(path)
 		.then(function(output){
+			console.log(output);
 			callback(output);
 		})
 	}

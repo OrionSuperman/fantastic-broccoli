@@ -18,7 +18,7 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 			
 			$window.location.href = '#/game/' + data.data._id;
 			$scope.game = data.data;
-
+			$scope.current_user = CurrentFactory.getCurrentUser();
 		})
 	}
 
@@ -31,8 +31,11 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 
 	$scope.chooseOption = function(answer){
 		var info = {user: $scope.current_user, answer: answer, game: $scope.game}
+		console.log("CHOOSOPITION");
 		GameFactory.update(info, function(data){
-			$window.location.href = '#/user/' + current_user._id;
+			console.log("CHOOSOPITION2222222");
+			$window.location.href = '#/user/' + $scope.current_user._id;
+			$scope.current_user = CurrentFactory.getCurrentUser();
 		})
 	}
 
@@ -47,6 +50,13 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 		// $scope.game._id = path.substring(7,path.length);
 		GameFactory.show(function(data){
 			$scope.game = data.data;
+			$scope.current_user = CurrentFactory.getCurrentUser();
+		})
+	} 
+	if(path.substring(0,6) == '/user/'){
+		// $scope.game._id = path.substring(7,path.length);
+		UserFactory.show(path, function(output){
+			$scope.user = output.data;
 		})
 	} 
 })

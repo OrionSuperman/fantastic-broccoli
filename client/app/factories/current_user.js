@@ -1,6 +1,6 @@
 console.log('current_user.js');
 
-game_app.factory('CurrentFactory', function(){
+game_app.factory('CurrentFactory', function($http){
 	var factory = {};
 	var current_user;
 	factory.setCurrentUser = function(user){
@@ -8,6 +8,7 @@ game_app.factory('CurrentFactory', function(){
 	}
 
 	factory.getCurrentUser = function(){
+
 		return current_user;
 	}
 

@@ -35,36 +35,29 @@ module.exports = (function(){
 			})
 		},
 		create: function(req, res){
-			Game.findOne({}, {}, { sort: { 'created_at' : -1} }, function(err, last_game){
-				// console.log(last_game);
-				if(!last_game){
-					var newgame = new Game();
-					newgame.user1._user = req.body._id;
-					newgame.save(function(err){
-						if(err){
-							console.log(err);
-						} else {
-							res.json(game);
-						}
-					});
-				} else {
-					if(!last_game.userA){
-						last_game.userA._user = req.body.user._id;
-						res.json(last_game);
+			if(gameQueue.length > 0 && gameQueue[gameQueue.length-1].user1._user != req.body._id){
+
+				var newgame = gameQueue.pop();
+				newgame.userA._user = req.body._id;
+				newgame.save(function(err){
+					if(err){
+						console.log(err);
 					} else {
-						var game = new Game();
-						game.user1._user = req.body._id;
-						game.save(function(err){
-							if(err){
-								console.log(err);
-							} else {
-								res.json(game);
-							}
-						});
+						res.json(newgame);
 					}
-				}
-				
-			});
+				});
+			} else {
+				var game = new Game();
+				game.user1._user = req.body._id;
+				game.save(function(err){
+					if(err){
+						console.log(err);
+					} else {
+						gameQueue.push(game);
+						res.json(game);
+					}
+				});
+			}
 		},
 		// delete: function(req, res){
 		// 	console.log("THISISTHEBODY");
@@ -78,41 +71,63 @@ module.exports = (function(){
 		// 	})
 		// },
 		update: function(req, res){
-			console.log(req.body);
+			// console.log(req.body);
 			Game.findOne({_id: req.body.game._id}, function(err, results){
 				if(err){
 					console.log(err);
 				} else {
+					// console.log("FIRST");
 					if(results.user1._user == req.body.user._id){
+						// console.log("SECOND");
 						results.user1.answer = req.body.answer;
 					} else {
+						// console.log("THIRD");
 						results.userA.answer = req.body.answer;
+						// console.log(results.userA);
+						// console.log(results.user1);
 					}
 
-					if(results.user1.answser && results.userA.answer){
-						var points = table[results.user1.answer][results.userA.answer];
-						User.findOne({_id: results.user1._id}, function(err, user){
-							user.score += points;
-							user.save(function(err){
-								if(err){
-									console.log(err);
-								}
-							})
-						})
-						User.findOne({_id: results.userA._id}, function(err, user){
-							user.score -= points;
-							user.save(function(err){
-								if(err){
-									console.log(err);
-								}
-							})
-						})
-					}
-
+					
 					results.save(function(err){
 						if(err){
 							console.log(err);
 						} else {
+							console.log("**************************************");
+							console.log(results);
+							if(results.user1.answer && results.userA.answer){
+								console.log("FOURTH");
+
+								var points = table[results.user1.answer][results.userA.answer];
+								User.findOne({_id: results.user1._user}, function(err, user){
+									console.log("FIFTH");
+									console.log(points);
+									console.log(user.score);
+									user.score += points;
+									console.log(user.score);
+									user.save(function(err){
+										if(err){
+											console.log(err);
+										}
+										console.log("SIXTH");
+										console.log(user);
+									})
+								})
+								User.findOne({_id: results.userA._user}, function(err, user){
+									console.log("SEVENTH");
+									console.log(points);
+									console.log(user.score);
+									user.score -= points;
+									console.log(user.score);
+									user.save(function(err){
+										if(err){
+											console.log(err);
+										}
+										console.log("EIGTH");
+										console.log(user);
+									})
+								})
+							}
+							console.log("NINTH");
 							res.json(results);
 						}
 					})

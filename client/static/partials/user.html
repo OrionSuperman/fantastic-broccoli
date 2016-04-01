@@ -1,8 +1,7 @@
 <div ng-controller='GameController'>
-	<h1>Hello {{current_user.name}}</h1>
-	<h3>You have {{current_user.score}} score</h3>
+	<h1>Welcome to {{user.name}}'s page!</h1>
 
-	{{current_user}}
+	<h3>They currently have {{user.score}} points!</h3>
 
-	<button ng-click="newGame()">Play Again!</button>
+	<button ng-click="newGame()">Play A Game!</button>
 </div>
