@@ -93,38 +93,41 @@ module.exports = (function(){
 						if(err){
 							console.log(err);
 						} else {
-							console.log("**************************************");
-							console.log(results);
+							// console.log("**************************************");
+							// console.log(results);
 							if(results.user1.answer && results.userA.answer){
-								console.log("FOURTH");
+								// console.log("FOURTH");
 
 								var points = table[results.user1.answer][results.userA.answer];
 								User.findOne({_id: results.user1._user}, function(err, user){
-									console.log("FIFTH");
-									console.log(points);
-									console.log(user.score);
-									user.score += points;
-									console.log(user.score);
+									// console.log("FIFTH");
+									// console.log(points);
+									// console.log(user.score);
+									user.score -= points;
+									console.log(results._id);
+									user._games.push(results._id);
+									console.log(user._games);
 									user.save(function(err){
 										if(err){
 											console.log(err);
 										}
-										console.log("SIXTH");
-										console.log(user);
+										// console.log("SIXTH");
+										// console.log(user);
 									})
 								})
 								User.findOne({_id: results.userA._user}, function(err, user){
-									console.log("SEVENTH");
-									console.log(points);
-									console.log(user.score);
-									user.score -= points;
-									console.log(user.score);
+									// console.log("SEVENTH");
+									// console.log(points);
+									// console.log(user.score);
+									user.score += points;
+									user._games.push(results._id);
+									// console.log(user.score);
 									user.save(function(err){
 										if(err){
 											console.log(err);
 										}
-										console.log("EIGTH");
-										console.log(user);
+										// console.log("EIGTH");
+										// console.log(user);
 									})
 								})
 							}

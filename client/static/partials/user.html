@@ -2,7 +2,24 @@
 	<a ng-if="current_user" ng-click='logout()' href='#'>Logout</a>
 	<h1>Welcome to {{user.name}}'s page!</h1>
 
+
 	<h3>They currently have {{user.score}} points!</h3>
 
 	<button ng-click="newGame()">Play A Game!</button>
+
+	<h3>Past Games</h3>
+	<table class="table table-bordered table-striped">
+		<tr>
+			<th>Column Player</th>
+			<th>Column Chosen</th>
+			<th>Row Player</th>
+			<th>Row Chosen</th>
+		</tr>
+		<tr ng-repeat='game in user._games'>
+			<td>{{game.user1._user.name}} :: {{gameTable[game.user1.answer][game.userA.answer] * -1}}</td>
+			<td>Column {{game.user1.answer}} </td>
+			<td>{{game.userA._user.name}} :: {{gameTable[game.user1.answer][game.userA.answer]}}</td>
+			<td>Row {{game.userA.answer}}</td>
+		</tr>
+	</table>
 </div>

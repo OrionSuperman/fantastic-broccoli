@@ -53,10 +53,17 @@ game_app.controller('GameController', function($scope, $location, $window, GameF
 			$scope.current_user = CurrentFactory.getCurrentUser();
 		})
 	} 
+
+
 	if(path.substring(0,6) == '/user/'){
 		// $scope.game._id = path.substring(7,path.length);
 		UserFactory.show(path, function(output){
 			$scope.user = output.data;
+			$scope.gameTable = [[],
+			 [0, 30, -10, 10],
+			 [0, -10, 20, -20],
+			 [0, -10, 20, -30]
+			];
 		})
 	} 
 })

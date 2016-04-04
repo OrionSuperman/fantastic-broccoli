@@ -16,7 +16,19 @@ module.exports = (function(){
 		},
 		show: function(req, res){
 			// console.log(req);
-			User.findOne({_id: req.params.id}, function(err, results){
+			User.findOne({_id: req.params.id})
+			.populate({
+				path: '_games',
+				populate: {
+					path: 'userA._user user1._user',
+					model: 'User'
+				},
+				// populate: {
+				// 	path: 'user1._user', 
+				// 	model: 'User'
+				// }
+			})
+			.exec(function(err, results){
 				if(err){
 					console.log(err);
 				} else {
